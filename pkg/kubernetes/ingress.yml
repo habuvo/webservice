@@ -5,11 +5,11 @@ metadata:
     kubernetes.io/ingress.class: nginx
     ingress.kubernetes.io/rewrite-target: /
   labels:
-    app: { { .ServiceName } }
-  name: { { .ServiceName } }
+    app: webservice
+  name: webservice
 spec:
   backend:
-    serviceName: { { .ServiceName } }
+    serviceName: webservice
     servicePort: 80
   rules:
     - host: server.test
@@ -17,5 +17,5 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: { { .ServiceName } }
+              serviceName: webservice
               servicePort: 80

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: { { .ServiceName } }
+  name: webservice
   labels:
-    app: { { .ServiceName } }
+    app: webservice
 spec:
   ports:
     - port: 80
@@ -11,4 +11,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: { { .ServiceName } }
+    app: webservice
