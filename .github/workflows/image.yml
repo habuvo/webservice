@@ -16,7 +16,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: webservice
+          images: habuvo/webservice
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -33,5 +33,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: habuvo/${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
