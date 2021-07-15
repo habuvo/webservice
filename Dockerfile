@@ -1,9 +1,15 @@
 FROM golang:alpine AS build-env
-RUN apk --no-cache add build-base git gcc ca-certificates
+
+WORKDIR /app
+RUN apk --no-cache add ca-certificates gcc git musl-dev
+COPY go.mod . 
+COPY go.sum .
+RUN go mod download
 COPY . .
-RUN cd /cmd && go build -o webserver
+
+RUN cd cmd && go build -o webserver
 
 FROM scratch
 
-COPY --from=build-env /cmd/webserver /
-ENTRYPOINT ["/main"]
+COPY --from=build-env /app/cmd/webserver /
+ENTRYPOINT ["/webserver"]
