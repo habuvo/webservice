@@ -1,4 +1,3 @@
-# PostgreSQL StatefulSet
 apiVersion: v1
 kind: StatefulSet
 metadata:
@@ -23,7 +22,6 @@ spec:
       envFrom:
         - configMapRef:
           name: postgres-db-config
-  # Volume Claim
   volumeClaimTemplates:
     - metadata:
         name: postgresql-db-disk
@@ -31,4 +29,4 @@ spec:
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 25Gi
+            storage: 5Gi
