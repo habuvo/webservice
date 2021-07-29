@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webservice
@@ -6,6 +6,9 @@ metadata:
     app: webservice
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+      app: webservice
   strategy:
     type: RollingUpdate
     rollingUpdate:
