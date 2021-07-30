@@ -19,9 +19,9 @@ spec:
           volumeMounts:
             - name: postgresql-db-disk
               mountPath: /data
-      envFrom:
-        - configMapRef:
-          name: postgres-db-config
+          envFrom:
+            - configMapRef:
+                name: postgres-db-config
   volumeClaimTemplates:
     - metadata:
         name: postgresql-db-disk
