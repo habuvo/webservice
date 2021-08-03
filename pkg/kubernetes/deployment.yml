@@ -25,6 +25,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: postgres-db-config
           livenessProbe:
             httpGet:
               path: /healthz

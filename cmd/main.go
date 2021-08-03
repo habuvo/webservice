@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -30,12 +31,7 @@ func main() {
 		lstmetrics = ":8081"
 	}
 
-	dsnPG := os.Getenv("DSN_PG")
-	if len(dsnPG) == 0 {
-		zap.L().Fatal("Postgre DSN is not set")
-	}
-
-	storage, err := storage.NewPostgreStorage(dsnPG, zap.L().Named("postgre"))
+	storage, err := storage.NewPostgreStorage(fmt.Sprintf("user=%q password=%q dbname=%q", os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_DB")), zap.L().Named("postgre"))
 	if err != nil {
 		zap.L().Fatal("Postgre init", zap.Error(err))
 	}
