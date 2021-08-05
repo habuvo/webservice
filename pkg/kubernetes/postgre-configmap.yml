@@ -2,9 +2,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-db-config
+  name: postgres-config
   labels:
-    app: postgresql-db
+    app: postgres
 data:
   POSTGRES_DB: testdb
   POSTGRES_USER: testdbuser

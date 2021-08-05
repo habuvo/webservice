@@ -27,7 +27,10 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: postgres-db-config
+                name: postgres-config
+          env:
+            - name: DATABASE_HOST
+              value: postgres
           livenessProbe:
             httpGet:
               path: /healthz

@@ -31,7 +31,7 @@ func main() {
 		lstmetrics = ":8081"
 	}
 
-	storage, err := storage.NewPostgreStorage(fmt.Sprintf("user=%q password=%q dbname=%q", os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_DB")), zap.L().Named("postgre"))
+	storage, err := storage.NewPostgreStorage(fmt.Sprintf("host=%q user=%q password=%q dbname=%q", os.Getenv("DATABASE_HOST"), os.Getenv("POSTGRES_USER"), os.Getenv("POSTGRES_PASSWORD"), os.Getenv("POSTGRES_DB")), zap.L().Named("postgre"))
 	if err != nil {
 		zap.L().Fatal("Postgre init", zap.Error(err))
 	}

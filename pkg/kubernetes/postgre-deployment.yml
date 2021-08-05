@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgresql
+  name: postgres
 spec:
   selector:
     matchLabels:
-      app: postgresql
+      app: postgres
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: postgresql
+        app: postgres
     spec:
       containers:
         - image: postgresql:latest
-          name: postgresql
+          name: postgres
           ports:
             - containerPort: 5432
-              name: postgresql
+              name: postgres
           volumeMounts:
             - name: postgresql-persistent-storage
               mountPath: /data/pgdata
       volumes:
         - name: postgresql-persistent-storage
           persistentVolumeClaim:
-            claimName: postgresql-db
+            claimName: postgres
