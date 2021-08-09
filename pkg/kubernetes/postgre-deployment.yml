@@ -16,13 +16,10 @@ spec:
       containers:
         - image: postgresql:latest
           name: postgres
-          ports:
-            - containerPort: 5432
-              name: postgres
           volumeMounts:
-            - name: postgresql-persistent-storage
+            - name: postgresql
               mountPath: /data/pgdata
       volumes:
-        - name: postgresql-persistent-storage
+        - name: postgresql
           persistentVolumeClaim:
-            claimName: postgres
+            claimName: postgresclaim

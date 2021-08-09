@@ -1,14 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webservice
+  name: backend
   labels:
     app: webservice
+    tier: backend
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: webservice
+      tier: backend
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,11 +20,12 @@ spec:
     metadata:
       labels:
         app: webservice
+        tier: backend
     spec:
       containers:
-        - name: webservice
+        - name: backend
           image: docker.io/habuvo/webservice:latest
-          imagePullPolicy: Always
+          imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 8080
           envFrom:
@@ -39,11 +42,4 @@ spec:
             httpGet:
               path: /readyz
               port: 8000
-          resources:
-            limits:
-              cpu: 10m
-              memory: 30Mi
-            requests:
-              cpu: 10m
-              memory: 30Mi
-      terminationGracePeriodSeconds: 30
+      restartPolicy: Always

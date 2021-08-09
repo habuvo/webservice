@@ -6,12 +6,14 @@ spec:
   serviceName: postgres
   selector:
     matchLabels:
-      app: postgres
+      app: webservice
+      tier: postgres
   replicas: 2
   template:
     metadata:
       labels:
-        app: postgres
+        app: webservice
+        tier: postgres
     spec:
       containers:
         - name: postgres
@@ -19,14 +21,22 @@ spec:
           volumeMounts:
             - name: postgres
               mountPath: /data
+              subPath: postgres
           envFrom:
             - configMapRef:
                 name: postgres-config
+          ports:
+            - containerPort: 5432
+              name: postgredb
   volumeClaimTemplates:
     - metadata:
-        name: postgres-disk
+        name: postgresclaim
+        labels:
+          app: webservice
+          tier: postgres
       spec:
-        accessModes: ["ReadWriteOnce"]
+        accessModes:
+          - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
+            storage: 1Gi
