@@ -14,8 +14,11 @@ spec:
         app: postgres
     spec:
       containers:
-        - image: postgresql:latest
+        - image: postgres:latest
           name: postgres
+          envFrom:
+            - configMapRef:
+                name: postgres-config
           volumeMounts:
             - name: postgresql
               mountPath: /data/pgdata
